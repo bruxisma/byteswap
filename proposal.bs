@@ -6,13 +6,13 @@ Group: WG21
 Status: D
 Shortname: DXXXX
 Audience: SG6, SG14, LEWG
-Title: Byteswapping for fun and profit
+Title: Byteswapping for fun&&nuf
 Editor: Isabella Muerte, Target, isabella.muerte@target.com
 Date: 2018-07-12
 Repository: slurps-mad-rips/byteswap
 URL: 
 !Current Source: <a href="https://github.com/slurps-mad-rips/byteswap/blob/master/proposal.bs">GitHub</a>
-!Implementation: https://github.com/slurps-mad-rips/byteswap
+!Implementation: <a href="https://github.com/slurps-mad-rips/byteswap">slurps-mad-rips/byteswap</a>
 </pre>
 
 # Revision History # {#changelog}
@@ -36,7 +36,7 @@ Note: The phrase one instruction or less refers to compilers inserting at
       most one instruction, and at the very least removing any instructions
       due to optimizations.
 
-# Design Considerations {#design}
+# Design Considerations # {#design}
 
 The design for the byteswap free function is quite simple. It takes any
 integer type whose byte order (as opposed to bit order) is that of an even
@@ -58,8 +58,7 @@ namespace std {
 }
 ```
 
-Where `std::is_integral_v<IntegerType>` is `true`, and
-`sizeof(IntegerType) % 2 == 0` is `true`.
+Where `std::is_integral_v<IntegerType>` is `true`.
 
 # Wording # {#wording}
 
@@ -77,8 +76,7 @@ namespace std {
 <li>*Remarks*
   This function shall not participate in overload resolution unless:
   <ul>
-    <li>`std::is_integral_v<IntegerType>` is `true`;</li>
-    <li>`sizeof(IntegerType) % 2 == 0` is `true`;</li>
+    <li>`std::is_integral_v<IntegerType>` is `true`</li>
   </ul>
 </li>
 <li>*Returns*
@@ -89,7 +87,7 @@ namespace std {
 </ol>
 </ins>
 
-Feature testing #{feature-test}
+Feature testing {#feature-test}
 ---------------
 
 The `__cpp_lib_byteswap` feature test macro should be added.

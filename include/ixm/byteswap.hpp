@@ -10,15 +10,6 @@ namespace ixm {
 inline namespace r0 {
 namespace impl {
 
-template <class T>
-using is_byteswappable = std::conjunction<
-  std::is_integral<T>,
-  std::bool_constant<sizeof(T) % 2 == 0>
->;
-
-template <class T>
-constexpr bool is_byteswappable_v = is_byteswappable<T>::value;
-
 template <class T> constexpr void is_constexpr(T&& t) { }
 
 template <class T>
@@ -67,8 +58,9 @@ inline namespace r0 {
 
 template <
   class IntegerType,
-  class=std::enable_if_t<impl::is_byteswappable_v<IntegerType>>
+  class=std::enable_if_t<std::is_integral_v<IntegerType>>
 > constexpr IntegerType byteswap (IntegerType value) noexcept {
+  if constexpr (sizeof(IntegerType) == 1) { return value; }
   #if defined(_MSC_VER)
     if constexpr (IXM_IS_CONSTEXPR(value)) {
       return impl::const_bswap(impl::as_unsigned(value));
